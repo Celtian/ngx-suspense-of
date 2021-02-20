@@ -50,24 +50,21 @@ yarn add ngx-suspense-of
 ### Example code
 
 ```html
-<div
-  *ngxSuspense="3; 
-    let index = index;
-    let even = even;
-    let odd = odd;
-    let first = first;
-    let last = last;"
+<ng-container
+  *ngxSuspense="
+    let data of observable;
+    loading: loading;
+    empty: empty;
+    error: error"
 >
-  {{ index }} {{ even }} {{ odd }} {{ first }} {{ last }}
-</div>
-```
-
-### Result
-
-```code
-  0 true false true false
-  1 false true false false
-  2 true false false true
+  <pre>{{ data | json }}</pre>
+</ng-container>
+<ng-template #loading>Loading ...</ng-template>
+<ng-template #empty>Incoming data are empty</ng-template>
+<ng-template #error let-tryAgain let-error="error">
+  <pre>{{ error }}</pre>
+  <button (click)="tryAgain()">Try again</button>
+</ng-template>
 ```
 
 ## Dependencies
