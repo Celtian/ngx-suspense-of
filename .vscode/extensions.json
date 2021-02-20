@@ -1,0 +1,16 @@
+{
+  // See https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions
+  // for the documentation about the extensions.json format
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "formulahendry.auto-rename-tag",
+    "waderyan.gitblame",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "tyriar.sort-lines",
+    "simonsiefke.svg-preview",
+    "shd101wyy.markdown-preview-enhanced",
+    "tht13.html-preview-vscode"
+  ]
+}

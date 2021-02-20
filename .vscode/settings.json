@@ -1,0 +1,17 @@
+{
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#d21919",
+    "statusBar.foreground": "#ffffff"
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll": true
+  },
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "files.eol": "\r\n",
+  "files.encoding": "utf8",
+  "prettier.endOfLine": "lf",
+  "javascript.implicitProjectConfig.experimentalDecorators": true
+}

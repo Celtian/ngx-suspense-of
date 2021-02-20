@@ -1,0 +1,34 @@
+{
+  "name": "ngx-suspense-of",
+  "version": "0.0.0",
+  "author": {
+    "name": "Dominik Hladík",
+    "email": "dominik.hladik@seznam.cz",
+    "url": "https://github.com/Celtian"
+  },
+  "private": false,
+  "license": "MIT",
+  "description": "Angular directive that add suspense to your app",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "homepage": "https://github.com/Celtian/ngx-suspense-of",
+  "repository": {
+    "url": "git+https://github.com/Celtian/ngx-suspense-of.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/Celtian/ngx-suspense-of/issues"
+  },
+  "keywords": [
+    "angular",
+    "ngx",
+    "suspense"
+  ],
+  "engines": {
+    "node": ">=10"
+  }
+}

@@ -1,0 +1,76 @@
+name: Build & Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-${{ env.cache-name }}-
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+
+      - name: Install dependencies # Install all deps
+        run: yarn
+
+      - name: Sync versions # Sync versions
+        run: yarn syncprojects
+
+      - name: Build demo app # Build Schematics and move
+        run: yarn build:demo --base-href https://celtian.github.io/ngx-suspense-of/
+
+      - name: Build ngx-suspense-of # Build
+        run: yarn build
+
+      - name: Run tests
+        run: yarn test --code-coverage --configuration=ci
+
+      - name: Upload coverage reports
+        run: bash <(curl -s https://codecov.io/bash)
+
+      - name: Publish NPM
+        run: npm publish --folder dist/ngx-suspense-of
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      # Publish to GitHub Package Registry
+      - name: Set up package for GPR
+        run: yarn gpr:setup
+
+      - name: Use GPR
+        uses: actions/setup-node@master
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@celtian'
+
+      - name: Publish to GitHub Package Registry
+        run: |
+          cd dist/ngx-suspense-of
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{github.token}}
+
+      - name: Deploy Github Pages
+        uses: peaceiris/actions-gh-pages@v2.5.0
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./dist/demo
