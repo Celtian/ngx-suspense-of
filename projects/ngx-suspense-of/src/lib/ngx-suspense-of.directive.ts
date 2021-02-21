@@ -12,7 +12,7 @@ export const loading = Symbol();
 
 export type Loading = typeof loading;
 
-interface NgxSuspenseState<T> {
+export interface NgxSuspenseState<T> {
   state: 'loading' | 'error' | 'data' | 'empty';
   data?: T;
   error?: any;
