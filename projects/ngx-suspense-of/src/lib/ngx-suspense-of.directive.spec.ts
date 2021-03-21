@@ -387,4 +387,8 @@ describe('NgxSuspenseOfDirective', () => {
       done();
     });
   }));
+
+  it('should ngTemplateContextGuard return true', (() => {
+    expect(NgxSuspenseOfDirective.ngTemplateContextGuard(null, null)).toEqual(true);
+  }));
 });
