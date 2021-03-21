@@ -7,7 +7,6 @@
 [![Package License](https://img.shields.io/npm/l/ngx-suspense-of.svg)](https://www.npmjs.com/ngx-suspense-of)
 [![NPM Downloads](https://img.shields.io/npm/dm/ngx-suspense-of.svg)](https://www.npmjs.com/ngx-suspense-of)
 [![Build & Publish](https://github.com/celtian/ngx-suspense-of/workflows/Build%20&%20Publish/badge.svg)](https://github.com/celtian/ngx-suspense-of/actions)
-[![volkswagen status](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen)
 [![codecov](https://codecov.io/gh/Celtian/ngx-suspense-of/branch/master/graph/badge.svg?token=1IRUKIKM0D)](https://codecov.io/gh/celtian/ngx-suspense-of/)
 [![stars](https://badgen.net/github/stars/celtian/ngx-suspense-of)](https://github.com/celtian/ngx-suspense-of/)
 [![forks](https://badgen.net/github/forks/celtian/ngx-suspense-of)](https://github.com/celtian/ngx-suspense-of/)
