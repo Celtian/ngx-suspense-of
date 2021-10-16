@@ -16,7 +16,7 @@
 
 > ✓ _Angular 12, Ivy and SSR compatible_
 
-Here's the [demo](http://celtian.github.io/ngx-suspense-of/) or [stackblitz live preview](https://stackblitz.com/edit/ngx-suspense-of)
+Here's the [demo](http://celtian.github.io/ngx-suspense-of/) or [stackblitz live preview](https://stackblitz.com/edit/ngx-suspense-of) or [codesandbox live preview](https://codesandbox.io/s/ngx-suspense-of-60z62)
 
 - Lightweight
 - No dependencies!
