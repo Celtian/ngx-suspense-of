@@ -14,7 +14,7 @@
 
 > Angular directive for repeating HTML element by count
 
-> ✓ _Angular 12, Ivy and SSR compatible_
+> ✓ _Angular 13, Ivy and SSR compatible_
 
 Here's the [demo](http://celtian.github.io/ngx-suspense-of/) or [stackblitz live preview](https://stackblitz.com/edit/ngx-suspense-of) or [codesandbox live preview](https://codesandbox.io/s/ngx-suspense-of-60z62)
 
@@ -43,6 +43,13 @@ yarn add ngx-suspense-of
    ]
   })
 ```
+
+## Compatibility
+
+| Angular   | ngx-if-platform | Install                      |
+| --------- | --------------- | ---------------------------- |
+| >= 12     | 1.x             | `yarn add ngx-suspense-of`   |
+| >= 5 < 13 | 0.x             | `yarn add ngx-suspense-of@0` |
 
 ## Quick start
 
