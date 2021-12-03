@@ -46,7 +46,7 @@ yarn add ngx-suspense-of
 
 ## Compatibility
 
-| Angular   | ngx-if-platform | Install                      |
+| Angular   | ngx-suspense-of | Install                      |
 | --------- | --------------- | ---------------------------- |
 | >= 12     | 1.x             | `yarn add ngx-suspense-of`   |
 | >= 5 < 13 | 0.x             | `yarn add ngx-suspense-of@0` |
