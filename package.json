@@ -57,6 +57,8 @@
     "@angular/cli": "^15.0.3",
     "@angular/compiler-cli": "^15.0.3",
     "@angular/language-service": "^15.0.3",
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
     "@types/jasmine": "^4.3.1",
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^16.18.8",
