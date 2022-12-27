@@ -33,7 +33,7 @@ jobs:
             ${{ runner.OS }}-yarn-
             ${{ runner.OS }}-
 
-      - name: Install dependencies # Install all deps
+      - name: Install dependencies
         run: yarn
 
       - name: Sync versions # Sync versions
