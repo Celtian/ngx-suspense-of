@@ -1,13 +1,13 @@
 {
   "extends": "../../.eslintrc.json",
-  "ignorePatterns": ["!**/*"],
+  "ignorePatterns": [
+    "!**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
-      "parserOptions": {
-        "project": ["projects/ngx-suspense-of/tsconfig.lib.json", "projects/ngx-suspense-of/tsconfig.spec.json"],
-        "createDefaultProgram": true
-      },
+      "files": [
+        "*.ts"
+      ],
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
@@ -28,7 +28,9 @@
       }
     },
     {
-      "files": ["*.html"],
+      "files": [
+        "*.html"
+      ],
       "rules": {}
     }
   ]

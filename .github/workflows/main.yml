@@ -7,11 +7,8 @@ on:
 
 jobs:
   install-and-build:
-    name: Install & Build
+    name: 🛠️ Install & Build
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [18]
 
     steps:
       - name: Checkout
@@ -20,21 +17,14 @@ jobs:
       - name: Setup node version
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 18
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Cache node modules
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-yarn-${{ env.cache-name }}-
-            ${{ runner.OS }}-yarn-
-            ${{ runner.OS }}-
+      - name: Install
+        uses: ./.github/actions/cached-deps
 
-      - name: Install dependencies
-        run: yarn
+      - name: Lint
+        run: yarn lint
 
       - name: Sync versions # Sync versions
         run: yarn syncprojects
@@ -77,7 +67,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == false
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 18
           registry-url: https://npm.pkg.github.com/
           scope: '@celtian'
 
