@@ -3,4 +3,3 @@
  */
 
 export * from './lib/ngx-suspense-of.directive';
-export * from './lib/ngx-suspense-of.module';

@@ -1,6 +1,5 @@
-
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NgxSuspenseOfModule } from 'projects/ngx-suspense-of/src/public-api';
+import { NgxSuspenseOfDirective } from 'projects/ngx-suspense-of/src/public-api';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -9,12 +8,7 @@ describe('AppComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-      imports: [
-        NgxSuspenseOfModule
-      ]
+      imports: [AppComponent, NgxSuspenseOfDirective]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);

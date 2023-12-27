@@ -7,34 +7,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: 🗜️ Checkout
         uses: actions/checkout@v3
 
-      - name: Setup node version
+      - name: 🗜️ Setup node version
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install
+      - name: 🛠️ Install
         uses: ./.github/actions/cached-deps
 
-      - name: Lint
+      - name: 🌡️ Lint
         run: yarn lint
 
-      - name: Sync versions # Sync versions
+      - name: 🛠️ Sync versions # Sync versions
         run: yarn syncprojects
 
-      - name: Build demo app # Build Schematics and move
+      - name: 📦 Build demo app # Build Schematics and move
         run: yarn build:demo --base-href https://celtian.github.io/ngx-suspense-of/
 
-      - name: Build ngx-suspense-of # Build
+      - name: 📦 Build ngx-suspense-of # Build
         run: yarn build
 
-      - name: Run tests
+      - name: 🧪 Run tests
         run: yarn test --configuration=ci
 
-      - name: Upload coverage reports
+      - name: ⬆️ Upload coverage reports
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos

@@ -11,34 +11,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: 🗜️ Checkout
         uses: actions/checkout@v3
 
-      - name: Setup node version
+      - name: 🗜️ Setup node version
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install
+      - name: 🛠️ Install
         uses: ./.github/actions/cached-deps
 
-      - name: Lint
+      - name: 🌡️ Lint
         run: yarn lint
 
-      - name: Sync versions # Sync versions
+      - name: 🛠️ Sync versions # Sync versions
         run: yarn syncprojects
 
-      - name: Build demo app # Build Schematics and move
+      - name: 📦 Build demo app # Build Schematics and move
         run: yarn build:demo --base-href https://celtian.github.io/ngx-suspense-of/
 
-      - name: Build ngx-suspense-of # Build
+      - name: 📦 Build ngx-suspense-of # Build
         run: yarn build
 
-      - name: Run tests
+      - name: 🧪 Run tests
         run: yarn test --code-coverage --configuration=ci
 
-      - name: Upload coverage reports
+      - name: ⬆️ Upload coverage reports
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
@@ -46,32 +46,32 @@ jobs:
           verbose: false
           dry_run: false
 
-      - name: Publish NPM
+      - name: 🚀 Publish NPM
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == false
         run: cd dist/ngx-suspense-of && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
-      - name: Publish NPM BETA
+      - name: 🚀 Publish NPM BETA
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == true
         run: cd dist/ngx-suspense-of && npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       # Publish to GitHub Package Registry
-      - name: Set up package for GPR
+      - name: 🛠️ Set up package for GPR
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == false
         run: yarn gpr:setup
 
-      - name: Use GPR
+      - name: 🛠️ Use GPR
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == false
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           registry-url: https://npm.pkg.github.com/
           scope: '@celtian'
 
-      - name: Publish to GitHub Package Registry
+      - name: 🚀 Publish to GitHub Package Registry
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == false
         run: |
           cd dist/ngx-suspense-of
@@ -79,14 +79,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{github.token}}
 
-      - name: Copy index.html to 404.html
+      - name: 🛠️ Copy index.html to 404.html
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == false
-        run: cp ./dist/demo/index.html ./dist/demo/404.html
+        run: cp ./dist/demo/browser/index.html ./dist/demo/browser/404.html
 
-      - name: Deploy Github Pages
+      - name: 🚀 Deploy Github Pages
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == false
         uses: peaceiris/actions-gh-pages@v3
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_branch: gh-pages
-          publish_dir: ./dist/demo
+          publish_dir: ./dist/demo/browser

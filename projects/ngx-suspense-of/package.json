@@ -10,8 +10,8 @@
   "license": "MIT",
   "description": "Angular directive that adds suspense to your app",
   "peerDependencies": {
-    "@angular/common": ">=12",
-    "@angular/core": ">=12"
+    "@angular/common": ">=14",
+    "@angular/core": ">=14"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -30,6 +30,6 @@
     "suspense"
   ],
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   }
 }

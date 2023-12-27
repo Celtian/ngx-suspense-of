@@ -19,7 +19,8 @@ export interface NgxSuspenseState<T> {
 }
 
 @Directive({
-  selector: '[ngxSuspense][ngxSuspenseOf]'
+  selector: '[ngxSuspense][ngxSuspenseOf]',
+  standalone: true
 })
 export class NgxSuspenseOfDirective<T> implements OnDestroy {
   private sub: Subscription;

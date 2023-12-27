@@ -60,12 +60,14 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/demo",
             "index": "projects/demo/src/index.html",
-            "main": "projects/demo/src/main.ts",
-            "polyfills": "projects/demo/src/polyfills.ts",
+            "browser": "projects/demo/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/demo/tsconfig.app.json",
             "assets": [
               "projects/demo/src/favicon.ico",
@@ -75,9 +77,7 @@
               "projects/demo/src/styles.scss"
             ],
             "scripts": [],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true
@@ -95,8 +95,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
