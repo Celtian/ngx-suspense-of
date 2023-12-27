@@ -30,29 +30,31 @@ Here's the [demo](http://celtian.github.io/ngx-suspense-of/) or [stackblitz live
 yarn add ngx-suspense-of
 ```
 
-2. Add NgxSuspenseOfModule into your module `imports`
+2. Add `NgxSuspenseOfDirective` into your `imports`
 
 ```typescript
-import { NgxSuspenseOfModule } from 'ngx-suspense-of';
+import { NgxSuspenseOfDirective } from 'ngx-suspense-of';
 
-@NgModule({
- // ...
- imports: [
-   // ...
-   NgxSuspenseOfModule
- ]
+@Component({
+  standalone: true,
+  imports: [
+    // ...
+    NgxSuspenseOfDirective
+  ],
 })
 ```
 
 or
 
 ```typescript
-import { NgxSuspenseOfModule } from 'ngx-suspense-of';
+import { NgxSuspenseOfDirective } from 'ngx-suspense-of';
 
-@Component({
-  standalone: true,
-  imports: [NgxSuspenseOfModule /*, ...*/],
+@NgModule({
+ // ...
+ imports: [
    // ...
+   NgxSuspenseOfDirective
+ ]
 })
 ```
 
@@ -60,7 +62,8 @@ import { NgxSuspenseOfModule } from 'ngx-suspense-of';
 
 | Angular   | ngx-suspense-of | Install                      |
 | --------- | --------------- | ---------------------------- |
-| >= 12     | 1.x             | `yarn add ngx-suspense-of`   |
+| >= 14     | 2.x             | `yarn add ngx-suspense-of`   |
+| >= 12     | 1.x             | `yarn add ngx-suspense-of@1` |
 | >= 5 < 13 | 0.x             | `yarn add ngx-suspense-of@0` |
 
 ## Quick start

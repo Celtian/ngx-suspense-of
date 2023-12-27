@@ -1,5 +1,7 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { concat, Observable, of, throwError } from 'rxjs';
+import { NgxSuspenseOfDirective } from 'projects/ngx-suspense-of/src/public-api';
+import { Observable, concat, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { VERSION } from '../environments/version';
 
@@ -21,7 +23,9 @@ const LOADING_DELAY = 1500; // in ms
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrl: './app.component.scss',
+  standalone: true,
+  imports: [NgxSuspenseOfDirective, JsonPipe]
 })
 export class AppComponent implements OnInit {
   public title = 'ngx-suspense-of';
