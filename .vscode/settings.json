@@ -4,14 +4,22 @@
     "statusBar.foreground": "#ffffff"
   },
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll": true
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
   },
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "typescript.updateImportsOnFileMove.enabled": "always",
   "files.eol": "\r\n",
   "files.encoding": "utf8",
-  "prettier.endOfLine": "lf",
-  "javascript.implicitProjectConfig.experimentalDecorators": true
+  "prettier.endOfLine": "lf"
 }
