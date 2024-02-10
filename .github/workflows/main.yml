@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: 🗜️ Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🗜️ Setup node version
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
@@ -23,28 +23,28 @@ jobs:
       - name: 🛠️ Install
         uses: ./.github/actions/cached-deps
 
-      - name: 🌡️ Lint
+      - name: 🛠️ Sync versions
+        run: yarn script:sync-projects
+
+      - name: 🧹 Lint
         run: yarn lint
-
-      - name: 🛠️ Sync versions # Sync versions
-        run: yarn syncprojects
-
-      - name: 📦 Build demo app # Build Schematics and move
-        run: yarn build:demo --base-href https://celtian.github.io/ngx-suspense-of/
-
-      - name: 📦 Build ngx-suspense-of # Build
-        run: yarn build
 
       - name: 🧪 Run tests
         run: yarn test --code-coverage --configuration=ci
 
       - name: ⬆️ Upload coverage reports
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v4
         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
           verbose: false
           dry_run: false
+
+      - name: 📦 Build demo app
+        run: yarn build:demo --base-href https://celtian.github.io/ngx-suspense-of/
+
+      - name: 📦 Build ngx-suspense-of
+        run: yarn build
 
       - name: 🚀 Publish NPM
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == false
@@ -58,14 +58,13 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
-      # Publish to GitHub Package Registry
       - name: 🛠️ Set up package for GPR
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == false
-        run: yarn gpr:setup
+        run: yarn script:gpr-setup
 
       - name: 🛠️ Use GPR
         if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref, 'beta') == false
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
