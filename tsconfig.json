@@ -5,19 +5,18 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
-    "module": "es2020",
+    "module": "ES2022",
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
-    "lib": ["es2018", "dom"],
+    "lib": ["ES2022", "dom"],
     "paths": {
       "ngx-suspense-of": ["dist/ngx-suspense-of"],
       "ngx-suspense-of/*": ["dist/ngx-suspense-of/*"]
     },
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
