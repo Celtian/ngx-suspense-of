@@ -1,6 +1,6 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
-  providers: [importProvidersFrom(BrowserModule)]
+  providers: [provideAnimations(), provideExperimentalZonelessChangeDetection()]
 };

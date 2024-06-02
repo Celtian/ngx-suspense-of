@@ -198,20 +198,21 @@ describe('NgxSuspenseOfDirective', () => {
   }
 
   let fixture: ComponentFixture<TestDirectiveComponent>;
-  let templateRef: jasmine.SpyObj<TemplateRef<NgxSuspenseDirectiveContext<any>>>;
-  let viewContainer: jasmine.SpyObj<ViewContainerRef>;
+  let templateRef: jest.Mocked<TemplateRef<NgxSuspenseDirectiveContext<any>>>;
+  let viewContainer: jest.Mocked<ViewContainerRef>;
 
   beforeEach(() => {
-    templateRef = jasmine.createSpyObj('TemplateRef<NgxSuspenseDirectiveContext<any>>', [
-      'elementRef',
-      'createEmbeddedView'
-    ]);
-    viewContainer = jasmine.createSpyObj('ViewContainerRef', [
-      'length',
-      'remove',
-      'createEmbeddedView',
-      'createComponent'
-    ]);
+    templateRef = {
+      elementRef: jest.fn(),
+      createEmbeddedView: jest.fn()
+    } as unknown as jest.Mocked<TemplateRef<NgxSuspenseDirectiveContext<any>>>;
+
+    viewContainer = {
+      length: 0,
+      remove: jest.fn(),
+      createEmbeddedView: jest.fn(),
+      createComponent: jest.fn()
+    } as unknown as jest.Mocked<ViewContainerRef>;
 
     fixture = TestBed.configureTestingModule({
       declarations: [TestDirectiveComponent],
@@ -345,64 +346,73 @@ describe('NgxSuspenseOfDirective', () => {
     });
   });
 
-  it('should use noErrorEmbed', (done) => {
+  it('should use noErrorEmbed', () => {
     const component = fixture.componentInstance;
     component.selected = 'noErrorEmbed';
     fixture.detectChanges();
-    expect(component.directive.state).toEqual({ state: 'loading' });
-    of(null)
-      .pipe(delay(LOADING_DELAY))
-      .subscribe((res) => {
-        expect(component.directive.state.state).toEqual('error');
-        done();
-      });
-  });
-
-  it('should use alternativeLoading', (done) => {
-    const component = fixture.componentInstance;
-    component.selected = 'alternativeLoading';
-    fixture.detectChanges();
-    expect(component.directive.state).toEqual({ state: 'loading' });
-    component.useAlternative = true;
-    fixture.detectChanges();
-    of(null)
-      .pipe(delay(LOADING_DELAY))
-      .subscribe((res) => {
-        expect(component.directive.state).toEqual({ state: 'loading' });
-        done();
-      });
-  });
-
-  it('should use alternativeEmpty', (done) => {
-    const expectedVals = expectToSubscribe<NgxSuspenseState<number[]>>([{ state: 'loading' }, { state: 'empty' }], () =>
-      done()
-    );
-    const component = fixture.componentInstance;
-    component.selected = 'alternativeEmpty';
-    fixture.detectChanges();
-
-    component.observables.noEmptyEmbed.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe((res) => {
-      if (res !== loading) {
-        component.useAlternative = true;
-      }
-      fixture.detectChanges();
-      expect(component.directive.state).toEqual(expectedVals());
+    fixture.whenStable().then((done) => {
+      expect(component.directive.state).toEqual({ state: 'loading' });
+      of(null)
+        .pipe(delay(LOADING_DELAY))
+        .subscribe((res) => {
+          expect(component.directive.state.state).toEqual('error');
+          done();
+        });
     });
   });
 
-  it('should use alternativeError', (done) => {
+  it('should use alternativeLoading', () => {
+    const component = fixture.componentInstance;
+    component.selected = 'alternativeLoading';
+    fixture.detectChanges();
+    fixture.whenStable().then((done) => {
+      expect(component.directive.state).toEqual({ state: 'loading' });
+      component.useAlternative = true;
+      fixture.detectChanges();
+      of(null)
+        .pipe(delay(LOADING_DELAY))
+        .subscribe((res) => {
+          expect(component.directive.state).toEqual({ state: 'loading' });
+          done();
+        });
+    });
+  });
+
+  it('should use alternativeEmpty', () => {
+    const component = fixture.componentInstance;
+    component.selected = 'alternativeEmpty';
+    fixture.detectChanges();
+    fixture.whenStable().then((done) => {
+      const expectedVals = expectToSubscribe<NgxSuspenseState<number[]>>(
+        [{ state: 'loading' }, { state: 'empty' }],
+        () => done()
+      );
+
+      component.observables.noEmptyEmbed.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe((res) => {
+        if (res !== loading) {
+          component.useAlternative = true;
+        }
+        fixture.detectChanges();
+        expect(component.directive.state).toEqual(expectedVals());
+      });
+    });
+  });
+
+  it('should use alternativeError', () => {
     const component = fixture.componentInstance;
     component.selected = 'alternativeError';
     fixture.detectChanges();
-    expect(component.directive.state).toEqual({ state: 'loading' });
-    of(null)
-      .pipe(delay(LOADING_DELAY))
-      .subscribe((res) => {
-        component.useAlternative = true;
-        fixture.detectChanges();
-        expect(component.directive.state.state).toEqual('error');
-        done();
-      });
+    fixture.whenStable().then((done) => {
+      expect(component.directive.state).toEqual({ state: 'loading' });
+      of(null)
+        .pipe(delay(LOADING_DELAY))
+        .subscribe((res) => {
+          component.useAlternative = true;
+          fixture.detectChanges();
+          expect(component.directive.state.state).toEqual('error');
+          done();
+        });
+    });
   });
 
   it('should ngTemplateContextGuard return true', () => {

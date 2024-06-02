@@ -30,7 +30,7 @@ jobs:
         run: yarn lint
 
       - name: 🧪 Run tests
-        run: yarn test --code-coverage --configuration=ci
+        run: yarn test:jest
 
       - name: ⬆️ Upload coverage reports
         uses: codecov/codecov-action@v4
