@@ -14,7 +14,7 @@
 
 > Angular directive for repeating HTML element by count
 
-> ✓ _Angular 17 compatible_
+> ✓ _Angular 18 compatible_
 
 Here's the [demo](http://celtian.github.io/ngx-suspense-of/) or [stackblitz live preview](https://stackblitz.com/edit/ngx-suspense-of) or [codesandbox live preview](https://codesandbox.io/s/ngx-suspense-of-60z62)
 
@@ -22,7 +22,7 @@ Here's the [demo](http://celtian.github.io/ngx-suspense-of/) or [stackblitz live
 - No dependencies!
 - Directive way
 
-## Install
+## 🛠️ Install
 
 1. Use yarn (or npm) to install the package
 
@@ -58,15 +58,7 @@ import { NgxSuspenseOfDirective } from 'ngx-suspense-of';
 })
 ```
 
-## Compatibility
-
-| Angular   | ngx-suspense-of | Install                      |
-| --------- | --------------- | ---------------------------- |
-| >= 14     | 2.x             | `yarn add ngx-suspense-of`   |
-| >= 12     | 1.x             | `yarn add ngx-suspense-of@1` |
-| >= 5 < 13 | 0.x             | `yarn add ngx-suspense-of@0` |
-
-## Quick start
+## 🚀 Quick start
 
 ### Example code
 
@@ -88,11 +80,19 @@ import { NgxSuspenseOfDirective } from 'ngx-suspense-of';
 </ng-template>
 ```
 
-## Dependencies
+## 🔧 Compatibility
+
+| Angular   | ngx-suspense-of | Install                      |
+| --------- | --------------- | ---------------------------- |
+| >= 14     | 2.x             | `yarn add ngx-suspense-of`   |
+| >= 12     | 1.x             | `yarn add ngx-suspense-of@1` |
+| >= 5 < 13 | 0.x             | `yarn add ngx-suspense-of@0` |
+
+## 📦 Dependencies
 
 _None_
 
-## License
+## 🪪 License
 
 Copyright &copy; 2021 - 2024 [Dominik Hladik](https://github.com/Celtian)
 
