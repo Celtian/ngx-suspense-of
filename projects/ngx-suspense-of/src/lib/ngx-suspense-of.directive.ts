@@ -18,6 +18,8 @@ export interface NgxSuspenseState<T> {
   error?: any;
 }
 
+export type NgxSuspenseStateChange = <T>(state: NgxSuspenseState<T>) => void;
+
 @Directive({
   selector: '[ngxSuspense][ngxSuspenseOf]',
   standalone: true
@@ -61,6 +63,11 @@ export class NgxSuspenseOfDirective<T> implements OnDestroy {
     }
   }
 
+  private onStateChange: NgxSuspenseStateChange;
+  @Input() public set ngxSuspenseStateChangeFn(fn: NgxSuspenseStateChange) {
+    this.onStateChange = fn;
+  }
+
   @Input() public set ngxSuspenseOf(obs: Observable<T | Loading>) {
     if (obs) {
       this.observable = obs;
@@ -89,27 +96,25 @@ export class NgxSuspenseOfDirective<T> implements OnDestroy {
       this.sub = null;
     }
 
-    this.sub = this.observable.subscribe(
-      (res) => {
-        if (typeof res === 'undefined' || res === null || (Array.isArray(res) && res.length === 0)) {
+    this.sub = this.observable.subscribe({
+      next: (data) => {
+        if (typeof data === 'undefined' || data === null || (Array.isArray(data) && data.length === 0)) {
           this.setState({ state: 'empty' });
-        } else if (res === loading) {
+        } else if (data === loading) {
           this.setState({ state: 'loading' });
         } else {
-          this.setState({ state: 'data', data: res });
+          this.setState({ state: 'data', data });
         }
       },
-      (error) => {
-        this.setState({ state: 'error', error });
-      }
-    );
+      error: (error) => this.setState({ state: 'error', error })
+    });
   }
 
   private setState(state: NgxSuspenseState<T>): void {
     this.state = state;
+    this.onStateChange?.(state);
 
     this.viewContainer.detach();
-
     switch (state.state) {
       case 'data': {
         if (!this.templateEmbededView) {
