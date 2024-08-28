@@ -165,42 +165,78 @@
     @switch (selection.value) {
       @case ('arrayCommon') {
         <ng-container
-          *ngxSuspense="let observable of observables.arrayCommon; loading: loading; empty: empty; error: error"
+          *ngxSuspense="
+            let observable of observables.arrayCommon;
+            loading: loading;
+            empty: empty;
+            error: error;
+            stateChangeFn: onStateChange
+          "
         >
           <pre>{{ observable | json }}</pre>
         </ng-container>
       }
       @case ('arrayEmpty') {
         <ng-container
-          *ngxSuspense="let observable of observables.arrayEmpty; loading: loading; empty: empty; error: error"
+          *ngxSuspense="
+            let observable of observables.arrayEmpty;
+            loading: loading;
+            empty: empty;
+            error: error;
+            stateChangeFn: onStateChange
+          "
         >
           <pre>{{ observable | json }}</pre>
         </ng-container>
       }
       @case ('arrayError') {
         <ng-container
-          *ngxSuspense="let observable of observables.arrayError; loading: loading; empty: empty; error: error"
+          *ngxSuspense="
+            let observable of observables.arrayError;
+            loading: loading;
+            empty: empty;
+            error: error;
+            stateChangeFn: onStateChange
+          "
         >
           <pre>{{ observable | json }}</pre>
         </ng-container>
       }
       @case ('objectCommon') {
         <ng-container
-          *ngxSuspense="let observable of observables.objectCommon; loading: loading; empty: empty; error: error"
+          *ngxSuspense="
+            let observable of observables.objectCommon;
+            loading: loading;
+            empty: empty;
+            error: error;
+            stateChangeFn: onStateChange
+          "
         >
           <pre>{{ observable | json }}</pre>
         </ng-container>
       }
       @case ('objectEmpty') {
         <ng-container
-          *ngxSuspense="let observable of observables.objectEmpty; loading: loading; empty: empty; error: error"
+          *ngxSuspense="
+            let observable of observables.objectEmpty;
+            loading: loading;
+            empty: empty;
+            error: error;
+            stateChangeFn: onStateChange
+          "
         >
           <pre>{{ observable | json }}</pre>
         </ng-container>
       }
       @case ('objectError') {
         <ng-container
-          *ngxSuspense="let observable of observables.objectError; loading: loading; empty: empty; error: error"
+          *ngxSuspense="
+            let observable of observables.objectError;
+            loading: loading;
+            empty: empty;
+            error: error;
+            stateChangeFn: onStateChange
+          "
         >
           <pre>{{ observable | json }}</pre>
         </ng-container>
