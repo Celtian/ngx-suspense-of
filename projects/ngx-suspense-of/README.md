@@ -68,7 +68,8 @@ import { NgxSuspenseOfDirective } from 'ngx-suspense-of';
     let data of observable;
     loading: loading;
     empty: empty;
-    error: error"
+    error: error
+    stateChangeFn: onStateChange"
 >
   <pre>{{ data | json }}</pre>
 </ng-container>
@@ -78,6 +79,12 @@ import { NgxSuspenseOfDirective } from 'ngx-suspense-of';
   <pre>{{ error }}</pre>
   <button (click)="tryAgain()">Try again</button>
 </ng-template>
+```
+
+```typescript
+  public onStateChange = <T>(state: NgxSuspenseState<T>): void => {
+    console.log(state);
+  };
 ```
 
 ## 🔧 Compatibility
