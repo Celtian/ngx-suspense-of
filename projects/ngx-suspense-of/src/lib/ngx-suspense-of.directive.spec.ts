@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, concat, of, throwError } from 'rxjs';
@@ -171,7 +172,8 @@ describe('NgxSuspenseOfDirective', () => {
         <pre>Alt - {{ error }}</pre>
         <button (click)="tryAgain()">Try again</button>
       </ng-template>
-    `
+    `,
+    standalone: false
   })
   class TestDirectiveComponent {
     @ViewChild(NgxSuspenseOfDirective) public directive: NgxSuspenseOfDirective<any>;
@@ -239,7 +241,7 @@ describe('NgxSuspenseOfDirective', () => {
     const component = fixture.componentInstance;
     component.selected = 'arrayCommon';
     fixture.detectChanges();
-    component.observables.arrayCommon.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe((res) => {
+    component.observables.arrayCommon.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe(() => {
       fixture.detectChanges();
       expect(component.directive.state).toEqual(expectedVals());
     });
@@ -252,7 +254,7 @@ describe('NgxSuspenseOfDirective', () => {
     const component = fixture.componentInstance;
     component.selected = 'arrayEmpty';
     fixture.detectChanges();
-    component.observables.arrayEmpty.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe((res) => {
+    component.observables.arrayEmpty.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe(() => {
       fixture.detectChanges();
       expect(component.directive.state).toEqual(expectedVals());
     });
@@ -265,7 +267,7 @@ describe('NgxSuspenseOfDirective', () => {
     expect(component.directive.state).toEqual({ state: 'loading' });
     of(null)
       .pipe(delay(LOADING_DELAY))
-      .subscribe((res) => {
+      .subscribe(() => {
         expect(component.directive.state.state).toEqual('error');
         done();
       });
@@ -279,7 +281,7 @@ describe('NgxSuspenseOfDirective', () => {
     const component = fixture.componentInstance;
     component.selected = 'objectCommon';
     fixture.detectChanges();
-    component.observables.objectCommon.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe((res) => {
+    component.observables.objectCommon.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe(() => {
       fixture.detectChanges();
       expect(component.directive.state).toEqual(expectedVals());
     });
@@ -293,7 +295,7 @@ describe('NgxSuspenseOfDirective', () => {
     const component = fixture.componentInstance;
     component.selected = 'objectEmpty';
     fixture.detectChanges();
-    component.observables.objectEmpty.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe((res) => {
+    component.observables.objectEmpty.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe(() => {
       fixture.detectChanges();
       expect(component.directive.state).toEqual(expectedVals());
     });
@@ -306,7 +308,7 @@ describe('NgxSuspenseOfDirective', () => {
     expect(component.directive.state).toEqual({ state: 'loading' });
     of(null)
       .pipe(delay(LOADING_DELAY))
-      .subscribe((res) => {
+      .subscribe(() => {
         expect(component.directive.state.state).toEqual('error');
         done();
       });
@@ -340,7 +342,7 @@ describe('NgxSuspenseOfDirective', () => {
     const component = fixture.componentInstance;
     component.selected = 'noEmptyEmbed';
     fixture.detectChanges();
-    component.observables.noEmptyEmbed.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe((res) => {
+    component.observables.noEmptyEmbed.pipe(delay(LOADING_DELAY), startWith(loading)).subscribe(() => {
       fixture.detectChanges();
       expect(component.directive.state).toEqual(expectedVals());
     });
@@ -354,7 +356,7 @@ describe('NgxSuspenseOfDirective', () => {
       expect(component.directive.state).toEqual({ state: 'loading' });
       of(null)
         .pipe(delay(LOADING_DELAY))
-        .subscribe((res) => {
+        .subscribe(() => {
           expect(component.directive.state.state).toEqual('error');
           done();
         });
@@ -371,7 +373,7 @@ describe('NgxSuspenseOfDirective', () => {
       fixture.detectChanges();
       of(null)
         .pipe(delay(LOADING_DELAY))
-        .subscribe((res) => {
+        .subscribe(() => {
           expect(component.directive.state).toEqual({ state: 'loading' });
           done();
         });
@@ -406,7 +408,7 @@ describe('NgxSuspenseOfDirective', () => {
       expect(component.directive.state).toEqual({ state: 'loading' });
       of(null)
         .pipe(delay(LOADING_DELAY))
-        .subscribe((res) => {
+        .subscribe(() => {
           component.useAlternative = true;
           fixture.detectChanges();
           expect(component.directive.state.state).toEqual('error');
