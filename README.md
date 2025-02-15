@@ -101,7 +101,7 @@ _None_
 
 ## 🪪 License
 
-Copyright &copy; 2021 - 2024 [Dominik Hladik](https://github.com/Celtian)
+Copyright &copy; 2021 - 2025 [Dominik Hladik](https://github.com/Celtian)
 
 All contents are licensed under the [MIT license].
 
