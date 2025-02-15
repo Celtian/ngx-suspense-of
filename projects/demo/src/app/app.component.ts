@@ -1,8 +1,8 @@
 import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NgxSuspenseOfDirective, NgxSuspenseState } from 'projects/ngx-suspense-of/src/public-api';
 import { concat, Observable, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { NgxSuspenseOfDirective, NgxSuspenseState } from '../../../ngx-suspense-of/src/public-api';
 import { VERSION } from '../environments/version';
 
 interface TestingObject {
@@ -23,7 +23,7 @@ const LOADING_DELAY = 1500; // in ms
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrl: './app.component.css',
   standalone: true,
   imports: [NgxSuspenseOfDirective, JsonPipe]
 })

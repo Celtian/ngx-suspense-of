@@ -13,8 +13,9 @@
     "target": "ES2022",
     "lib": ["ES2022", "dom"],
     "paths": {
-      "ngx-suspense-of": ["dist/ngx-suspense-of"],
-      "ngx-suspense-of/*": ["dist/ngx-suspense-of/*"]
+      "ngx-repeat": [
+        "./projects/ngx-suspense-of/src/public-api"
+      ]
     },
     "resolveJsonModule": true,
     "useDefineForClassFields": false

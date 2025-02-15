@@ -29,6 +29,9 @@ jobs:
       - name: 🧹 Lint
         run: yarn lint
 
+      - name: ♻️ Check circular dependencies
+        run: yarn check-circular-dependencies
+
       - name: 🧪 Run tests
         run: yarn test:jest
 
