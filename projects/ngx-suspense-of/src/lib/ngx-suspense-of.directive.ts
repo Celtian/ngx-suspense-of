@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Directive, EmbeddedViewRef, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, EmbeddedViewRef, Input, OnDestroy, TemplateRef, ViewContainerRef, inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 /**
@@ -26,13 +26,11 @@ export type NgxSuspenseStateChange = <T>(state: NgxSuspenseState<T>) => void;
   standalone: true
 })
 export class NgxSuspenseOfDirective<T> implements OnDestroy {
+  private templateRef = inject<TemplateRef<NgxSuspenseDirectiveContext<T>>>(TemplateRef);
+  private viewContainer = inject(ViewContainerRef);
+
   private sub: Subscription;
   private observable: Observable<T | Loading>;
-
-  constructor(
-    private templateRef: TemplateRef<NgxSuspenseDirectiveContext<T>>,
-    private viewContainer: ViewContainerRef
-  ) {}
 
   public state: NgxSuspenseState<T> = { state: 'loading' };
   private loadingTemplate: TemplateRef<any>;

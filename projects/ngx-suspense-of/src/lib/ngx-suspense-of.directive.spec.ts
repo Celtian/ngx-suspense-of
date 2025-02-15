@@ -1,15 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { JsonPipe, NgTemplateOutlet } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, concat, of, throwError } from 'rxjs';
 import { delay, startWith } from 'rxjs/operators';
-import {
-  Loading,
-  NgxSuspenseDirectiveContext,
-  NgxSuspenseOfDirective,
-  NgxSuspenseState,
-  loading
-} from './ngx-suspense-of.directive';
+import { Loading, NgxSuspenseOfDirective, NgxSuspenseState, loading } from './ngx-suspense-of.directive';
 
 interface TestingObject {
   field: string;
@@ -47,71 +42,71 @@ export const expectToSubscribe = <T>(args: T[], done: () => void) => {
 describe('NgxSuspenseOfDirective', () => {
   @Component({
     template: `
-      <ng-container [ngSwitch]="selected">
-        <ng-container *ngSwitchCase="'arrayCommon'">
+      @switch (selected) {
+        @case ('arrayCommon') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.arrayCommon }"
           ></ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'arrayEmpty'">
+        }
+        @case ('arrayEmpty') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.arrayEmpty }"
           ></ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'arrayError'">
+        }
+        @case ('arrayError') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.arrayError }"
           ></ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'objectCommon'">
+        }
+        @case ('objectCommon') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.objectCommon }"
           ></ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'objectEmpty'">
+        }
+        @case ('objectEmpty') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.objectEmpty }"
           ></ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'objectError'">
+        }
+        @case ('objectError') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.objectError }"
           ></ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'noObservable'">
+        }
+        @case ('noObservable') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.noObservable }"
           ></ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'infiniteLoading'">
+        }
+        @case ('infiniteLoading') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.infiniteLoading }"
           ></ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'noLoadingEmbed'">
+        }
+        @case ('noLoadingEmbed') {
           <ng-container *ngxSuspense="let data of observable?.noLoadingEmbed; empty: empty; error: error">
             <pre>{{ data | json }}</pre>
           </ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'noEmptyEmbed'">
+        }
+        @case ('noEmptyEmbed') {
           <ng-container *ngxSuspense="let data of observable?.noEmptyEmbed; loading: loading; error: error">
             <pre>{{ data | json }}</pre>
           </ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'noErrorEmbed'">
+        }
+        @case ('noErrorEmbed') {
           <ng-container *ngxSuspense="let data of observables?.noErrorEmbed; loading: loading; empty: empty">
             <pre>{{ data | json }}</pre>
           </ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'alternativeLoading'">
+        }
+        @case ('alternativeLoading') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{
@@ -120,8 +115,8 @@ describe('NgxSuspenseOfDirective', () => {
             }"
           >
           </ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'alternativeEmpty'">
+        }
+        @case ('alternativeEmpty') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{
@@ -130,8 +125,8 @@ describe('NgxSuspenseOfDirective', () => {
             }"
           >
           </ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="'alternativeError'">
+        }
+        @case ('alternativeError') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{
@@ -140,8 +135,8 @@ describe('NgxSuspenseOfDirective', () => {
             }"
           >
           </ng-container>
-        </ng-container>
-      </ng-container>
+        }
+      }
       <ng-template
         #data
         let-observable="observable"
@@ -173,8 +168,7 @@ describe('NgxSuspenseOfDirective', () => {
         <button (click)="tryAgain()">Try again</button>
       </ng-template>
     `,
-    // eslint-disable-next-line @angular-eslint/prefer-standalone
-    standalone: false
+    imports: [NgxSuspenseOfDirective, NgTemplateOutlet, JsonPipe]
   })
   class TestDirectiveComponent {
     @ViewChild(NgxSuspenseOfDirective) public directive: NgxSuspenseOfDirective<any>;
@@ -201,37 +195,22 @@ describe('NgxSuspenseOfDirective', () => {
   }
 
   let fixture: ComponentFixture<TestDirectiveComponent>;
-  let templateRef: jest.Mocked<TemplateRef<NgxSuspenseDirectiveContext<any>>>;
-  let viewContainer: jest.Mocked<ViewContainerRef>;
 
   beforeEach(() => {
-    templateRef = {
-      elementRef: jest.fn(),
-      createEmbeddedView: jest.fn()
-    } as unknown as jest.Mocked<TemplateRef<NgxSuspenseDirectiveContext<any>>>;
-
-    viewContainer = {
-      length: 0,
-      remove: jest.fn(),
-      createEmbeddedView: jest.fn(),
-      createComponent: jest.fn()
-    } as unknown as jest.Mocked<ViewContainerRef>;
-
     fixture = TestBed.configureTestingModule({
-      declarations: [TestDirectiveComponent],
-      imports: [NgxSuspenseOfDirective],
-      providers: [
-        { provide: TemplateRef, useValue: templateRef },
-        { provide: ViewContainerRef, useValue: viewContainer }
-      ]
+      imports: [TestDirectiveComponent]
     }).createComponent(TestDirectiveComponent);
 
     fixture.detectChanges();
   });
 
   it('should create an instance', () => {
-    const directive = new NgxSuspenseOfDirective(templateRef, viewContainer);
-    expect(directive).toBeTruthy();
+    const component = fixture.componentInstance;
+    fixture.detectChanges();
+    fixture.whenStable().then((done) => {
+      expect(component.directive).toBeTruthy();
+      done();
+    });
   });
 
   it('should use arrayCommon', (done) => {
