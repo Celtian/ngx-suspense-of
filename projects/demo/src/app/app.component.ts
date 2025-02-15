@@ -23,7 +23,7 @@ const LOADING_DELAY = 1500; // in ms
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrl: './app.component.css',
   standalone: true,
   imports: [NgxSuspenseOfDirective, JsonPipe]
 })
