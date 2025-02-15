@@ -1,8 +1,8 @@
 import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NgxSuspenseOfDirective, NgxSuspenseState } from 'projects/ngx-suspense-of/src/public-api';
 import { concat, Observable, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { NgxSuspenseOfDirective, NgxSuspenseState } from '../../../ngx-suspense-of/src/public-api';
 import { VERSION } from '../environments/version';
 
 interface TestingObject {

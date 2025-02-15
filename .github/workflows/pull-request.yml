@@ -25,6 +25,9 @@ jobs:
       - name: 🧹 Lint
         run: yarn lint
 
+      - name: ♻️ Check circular dependencies
+        run: yarn check-circular-dependencies
+
       - name: 🧪 Run tests
         run: npx jest --ci --json --coverage --testLocationInResults --outputFile=coverage/report.json
 
