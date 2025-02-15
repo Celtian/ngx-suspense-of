@@ -291,10 +291,10 @@ svg#clouds {
   margin-top: 8px;
   max-width: 600px;
   border-radius: 6px;
+}
 
-  &-content {
-    padding: 1rem;
-  }
+.example-content {
+  padding: 1rem;
 }
 
 .terminal > * {
