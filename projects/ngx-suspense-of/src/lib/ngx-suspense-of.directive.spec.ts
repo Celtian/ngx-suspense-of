@@ -173,6 +173,7 @@ describe('NgxSuspenseOfDirective', () => {
         <button (click)="tryAgain()">Try again</button>
       </ng-template>
     `,
+    // eslint-disable-next-line @angular-eslint/prefer-standalone
     standalone: false
   })
   class TestDirectiveComponent {
