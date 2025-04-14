@@ -47,49 +47,43 @@ describe('NgxSuspenseOfDirective', () => {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.arrayCommon }"
-          ></ng-container>
+          />
         }
         @case ('arrayEmpty') {
-          <ng-container
-            [ngTemplateOutlet]="data"
-            [ngTemplateOutletContext]="{ observable: observables?.arrayEmpty }"
-          ></ng-container>
+          <ng-container [ngTemplateOutlet]="data" [ngTemplateOutletContext]="{ observable: observables?.arrayEmpty }" />
         }
         @case ('arrayError') {
-          <ng-container
-            [ngTemplateOutlet]="data"
-            [ngTemplateOutletContext]="{ observable: observables?.arrayError }"
-          ></ng-container>
+          <ng-container [ngTemplateOutlet]="data" [ngTemplateOutletContext]="{ observable: observables?.arrayError }" />
         }
         @case ('objectCommon') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.objectCommon }"
-          ></ng-container>
+          />
         }
         @case ('objectEmpty') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.objectEmpty }"
-          ></ng-container>
+          />
         }
         @case ('objectError') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.objectError }"
-          ></ng-container>
+          />
         }
         @case ('noObservable') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.noObservable }"
-          ></ng-container>
+          />
         }
         @case ('infiniteLoading') {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{ observable: observables?.infiniteLoading }"
-          ></ng-container>
+          />
         }
         @case ('noLoadingEmbed') {
           <ng-container *ngxSuspense="let data of observable?.noLoadingEmbed; empty: empty; error: error">
@@ -113,8 +107,7 @@ describe('NgxSuspenseOfDirective', () => {
               observable: observables?.infiniteLoading,
               alternativeLoading: useAlternative
             }"
-          >
-          </ng-container>
+          />
         }
         @case ('alternativeEmpty') {
           <ng-container
@@ -123,8 +116,7 @@ describe('NgxSuspenseOfDirective', () => {
               observable: observables?.infiniteLoading,
               alternativeEmpty: useAlternative
             }"
-          >
-          </ng-container>
+          />
         }
         @case ('alternativeError') {
           <ng-container
@@ -133,8 +125,7 @@ describe('NgxSuspenseOfDirective', () => {
               observable: observables?.alternativeError,
               alternativeError: useAlternative
             }"
-          >
-          </ng-container>
+          />
         }
       }
       <ng-template
