@@ -8,10 +8,13 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "module": "ES2022",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "lib": ["ES2022", "dom"],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
     "paths": {
       "ngx-repeat": [
         "./projects/ngx-suspense-of/src/public-api"
