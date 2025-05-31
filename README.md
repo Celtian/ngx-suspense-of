@@ -91,7 +91,8 @@ import { NgxSuspenseOfDirective } from 'ngx-suspense-of';
 
 | Angular   | ngx-suspense-of | Install                      |
 | --------- | --------------- | ---------------------------- |
-| >= 14     | 2.x             | `yarn add ngx-suspense-of`   |
+| >= 20     | 3.x             | `yarn add ngx-suspense-of`   |
+| >= 14     | 2.x             | `yarn add ngx-suspense-of@2` |
 | >= 12     | 1.x             | `yarn add ngx-suspense-of@1` |
 | >= 5 < 13 | 0.x             | `yarn add ngx-suspense-of@0` |
 
