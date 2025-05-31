@@ -14,7 +14,7 @@
 
 > Angular directive for repeating HTML element by count
 
-> ✓ _Angular 19 compatible_
+> ✓ _Angular 20 compatible_
 
 Here's the [demo](http://celtian.github.io/ngx-suspense-of/) or [stackblitz live preview](https://stackblitz.com/edit/ngx-suspense-of) or [codesandbox live preview](https://codesandbox.io/s/ngx-suspense-of-60z62)
 
