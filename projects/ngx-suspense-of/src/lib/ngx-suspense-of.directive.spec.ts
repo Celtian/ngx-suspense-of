@@ -41,6 +41,7 @@ export const expectToSubscribe = <T>(args: T[], done: () => void) => {
 
 describe('NgxSuspenseOfDirective', () => {
   @Component({
+    imports: [NgxSuspenseOfDirective, NgTemplateOutlet, JsonPipe],
     template: `
       @switch (selected) {
         @case ('arrayCommon') {
@@ -158,8 +159,7 @@ describe('NgxSuspenseOfDirective', () => {
         <pre>Alt - {{ error }}</pre>
         <button (click)="tryAgain()">Try again</button>
       </ng-template>
-    `,
-    imports: [NgxSuspenseOfDirective, NgTemplateOutlet, JsonPipe]
+    `
   })
   class TestDirectiveComponent {
     @ViewChild(NgxSuspenseOfDirective) public directive: NgxSuspenseOfDirective<any>;
