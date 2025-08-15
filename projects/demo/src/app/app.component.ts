@@ -22,10 +22,10 @@ const LOADING_DELAY = 1500; // in ms
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  imports: [NgxSuspenseOfDirective, JsonPipe],
   standalone: true,
-  imports: [NgxSuspenseOfDirective, JsonPipe]
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
   public title = 'ngx-suspense-of';
