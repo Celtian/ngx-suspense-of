@@ -1,0 +1,32 @@
+name: Set report to PR
+description: Set code coverage report to PR
+inputs:
+  coverage-file:
+    description: 'Code coverage file'
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Find PR
+      id: finder
+      uses: jwalton/gh-find-current-pr@v1
+
+    - name: Code Coverage Report
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with:
+        filename: ${{ inputs.coverage-file }}
+        badge: true
+        fail_below_min: false
+        format: markdown
+        hide_branch_rate: false
+        hide_complexity: true
+        indicators: true
+        output: both
+        thresholds: '60 80'
+
+    - name: Add Coverage PR Comment
+      uses: marocchino/sticky-pull-request-comment@v2
+      with:
+        number: ${{ steps.finder.outputs.pr }}
+        recreate: true
+        path: code-coverage-results.md
