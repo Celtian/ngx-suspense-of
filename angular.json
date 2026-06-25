@@ -14,7 +14,7 @@
       "prefix": "ngx",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/ngx-suspense-of/tsconfig.lib.json",
             "project": "projects/ngx-suspense-of/ng-package.json"
@@ -31,8 +31,8 @@
             "buildTarget": "ngx-suspense-of:build",
             "tsConfig": "projects/ngx-suspense-of/tsconfig.spec.json",
             "runner": "vitest",
-            "codeCoverage": true,
-            "codeCoverageReporters": [
+            "coverage": true,
+            "coverageReporters": [
               "text",
               "html",
               "cobertura"
@@ -57,7 +57,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "options": {
             "outputPath": "dist/demo",
             "index": "projects/demo/src/index.html",
@@ -107,7 +107,7 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
             "buildTarget": "demo:build"
           },
@@ -118,7 +118,7 @@
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
             "buildTarget": "demo:build"
           }
@@ -129,12 +129,12 @@
             "buildTarget": "demo:build",
             "tsConfig": "projects/demo/tsconfig.spec.json",
             "runner": "vitest",
-            "codeCoverage": true,
-            "codeCoverageExclude": [
+            "coverage": true,
+            "coverageExclude": [
               "projects/**/environments/**",
               "projects/ngx-suspense-of/**"
             ],
-            "codeCoverageReporters": [
+            "coverageReporters": [
               "text",
               "html",
               "cobertura"

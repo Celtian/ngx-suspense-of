@@ -14,8 +14,8 @@ interface TestingObservables {
   arrayEmpty: Observable<number[]>;
   arrayError: Observable<number[]>;
   objectCommon: Observable<TestingObject>;
-  objectEmpty: Observable<TestingObject>;
-  objectError: Observable<TestingObject>;
+  objectEmpty: Observable<TestingObject | null>;
+  objectError: Observable<TestingObject | null>;
 }
 
 const LOADING_DELAY = 1500; // in ms
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
   </ng-template>
   `;
 
-  public observables: TestingObservables;
+  public observables!: TestingObservables;
 
   public ngOnInit(): void {
     this.observables = {

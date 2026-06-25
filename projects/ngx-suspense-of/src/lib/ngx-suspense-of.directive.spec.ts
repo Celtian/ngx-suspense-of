@@ -15,9 +15,9 @@ interface TestingObservables {
   arrayEmpty: Observable<number[]>;
   arrayError: Observable<number[]>;
   objectCommon: Observable<TestingObject>;
-  objectEmpty: Observable<TestingObject>;
-  objectError: Observable<TestingObject>;
-  noObservable: Observable<any>;
+  objectEmpty: Observable<TestingObject | null>;
+  objectError: Observable<TestingObject | null>;
+  noObservable: Observable<any> | null;
   infiniteLoading: Observable<Loading>;
   noLoadingEmbed: Observable<Loading>;
   noEmptyEmbed: Observable<number[]>;
@@ -37,57 +37,77 @@ describe('NgxSuspenseOfDirective', () => {
         @case ('arrayCommon') {
           <ng-container
             [ngTemplateOutlet]="data"
-            [ngTemplateOutletContext]="{ observable: observables?.arrayCommon }"
+            [ngTemplateOutletContext]="{ observable: $safeNavigationMigration(observables?.arrayCommon) }"
           />
         }
         @case ('arrayEmpty') {
-          <ng-container [ngTemplateOutlet]="data" [ngTemplateOutletContext]="{ observable: observables?.arrayEmpty }" />
+          <ng-container
+            [ngTemplateOutlet]="data"
+            [ngTemplateOutletContext]="{ observable: $safeNavigationMigration(observables?.arrayEmpty) }"
+          />
         }
         @case ('arrayError') {
-          <ng-container [ngTemplateOutlet]="data" [ngTemplateOutletContext]="{ observable: observables?.arrayError }" />
+          <ng-container
+            [ngTemplateOutlet]="data"
+            [ngTemplateOutletContext]="{ observable: $safeNavigationMigration(observables?.arrayError) }"
+          />
         }
         @case ('objectCommon') {
           <ng-container
             [ngTemplateOutlet]="data"
-            [ngTemplateOutletContext]="{ observable: observables?.objectCommon }"
+            [ngTemplateOutletContext]="{ observable: $safeNavigationMigration(observables?.objectCommon) }"
           />
         }
         @case ('objectEmpty') {
           <ng-container
             [ngTemplateOutlet]="data"
-            [ngTemplateOutletContext]="{ observable: observables?.objectEmpty }"
+            [ngTemplateOutletContext]="{ observable: $safeNavigationMigration(observables?.objectEmpty) }"
           />
         }
         @case ('objectError') {
           <ng-container
             [ngTemplateOutlet]="data"
-            [ngTemplateOutletContext]="{ observable: observables?.objectError }"
+            [ngTemplateOutletContext]="{ observable: $safeNavigationMigration(observables?.objectError) }"
           />
         }
         @case ('noObservable') {
           <ng-container
             [ngTemplateOutlet]="data"
-            [ngTemplateOutletContext]="{ observable: observables?.noObservable }"
+            [ngTemplateOutletContext]="{ observable: $safeNavigationMigration(observables?.noObservable) }"
           />
         }
         @case ('infiniteLoading') {
           <ng-container
             [ngTemplateOutlet]="data"
-            [ngTemplateOutletContext]="{ observable: observables?.infiniteLoading }"
+            [ngTemplateOutletContext]="{ observable: $safeNavigationMigration(observables?.infiniteLoading) }"
           />
         }
         @case ('noLoadingEmbed') {
-          <ng-container *ngxSuspense="let data of observables?.noLoadingEmbed; empty: empty; error: error">
+          <ng-container
+            *ngxSuspense="let data of $safeNavigationMigration(observables?.noLoadingEmbed); empty: empty; error: error"
+          >
             <pre>{{ data | json }}</pre>
           </ng-container>
         }
         @case ('noEmptyEmbed') {
-          <ng-container *ngxSuspense="let data of observables?.noEmptyEmbed; loading: loading; error: error">
+          <ng-container
+            *ngxSuspense="
+              let data of $safeNavigationMigration(observables?.noEmptyEmbed);
+              loading: loading;
+              error: error
+            "
+          >
             <pre>{{ data | json }}</pre>
           </ng-container>
         }
         @case ('noErrorEmbed') {
-          <ng-container *ngxSuspense="let data of observables?.noErrorEmbed; loading: loading; empty: empty">
+          <ng-container
+            *ngxSuspense="
+              let data of $safeNavigationMigration(observables?.noErrorEmbed);
+              loading: loading;
+              empty: empty
+            "
+          >
             <pre>{{ data | json }}</pre>
           </ng-container>
         }
@@ -95,7 +115,7 @@ describe('NgxSuspenseOfDirective', () => {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{
-              observable: observables?.infiniteLoading,
+              observable: $safeNavigationMigration(observables?.infiniteLoading),
               alternativeLoading: useAlternative
             }"
           />
@@ -104,7 +124,7 @@ describe('NgxSuspenseOfDirective', () => {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{
-              observable: observables?.infiniteLoading,
+              observable: $safeNavigationMigration(observables?.infiniteLoading),
               alternativeEmpty: useAlternative
             }"
           />
@@ -113,7 +133,7 @@ describe('NgxSuspenseOfDirective', () => {
           <ng-container
             [ngTemplateOutlet]="data"
             [ngTemplateOutletContext]="{
-              observable: observables?.alternativeError,
+              observable: $safeNavigationMigration(observables?.alternativeError),
               alternativeError: useAlternative
             }"
           />
@@ -152,7 +172,7 @@ describe('NgxSuspenseOfDirective', () => {
     `
   })
   class TestDirectiveComponent {
-    @ViewChild(NgxSuspenseOfDirective) public directive: NgxSuspenseOfDirective<any>;
+    @ViewChild(NgxSuspenseOfDirective) public directive!: NgxSuspenseOfDirective<any>;
 
     public observables: TestingObservables = {
       arrayCommon: of([1, 2, 3, 4, 5]).pipe(delay(LOADING_DELAY)),
@@ -171,7 +191,7 @@ describe('NgxSuspenseOfDirective', () => {
       alternativeError: concat(of([]).pipe(delay(LOADING_DELAY)), throwError(new Error('Some custom error')))
     };
 
-    public selected: keyof TestingObservables;
+    public selected: keyof TestingObservables = 'arrayCommon';
     public useAlternative = false;
   }
 
@@ -332,6 +352,8 @@ describe('NgxSuspenseOfDirective', () => {
   });
 
   it('should ngTemplateContextGuard return true', () => {
-    expect(NgxSuspenseOfDirective.ngTemplateContextGuard(null, null)).toEqual(true);
+    expect(
+      NgxSuspenseOfDirective.ngTemplateContextGuard(null as unknown as NgxSuspenseOfDirective<unknown>, null)
+    ).toEqual(true);
   });
 });

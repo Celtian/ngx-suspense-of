@@ -5,11 +5,16 @@
     "declarationMap": true,
     "declaration": true,
     "inlineSources": true,
-    "types": [],
-    "lib": ["dom", "ES2022"]
+    "types": []
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    },
     "strictMetadataEmit": true,
     "enableResourceInlining": true
   },

@@ -13,11 +13,11 @@ export const loading = Symbol();
 
 export type Loading = typeof loading;
 
-export interface NgxSuspenseState<T> {
-  state: 'loading' | 'error' | 'data' | 'empty';
-  data?: T;
-  error?: any;
-}
+export type NgxSuspenseState<T> =
+  | { state: 'loading' }
+  | { state: 'error'; error: any }
+  | { state: 'data'; data: T }
+  | { state: 'empty' };
 
 export type NgxSuspenseStateChange = <T>(state: NgxSuspenseState<T>) => void;
 
@@ -29,17 +29,17 @@ export class NgxSuspenseOfDirective<T> implements OnDestroy {
   private templateRef = inject<TemplateRef<NgxSuspenseDirectiveContext<T>>>(TemplateRef);
   private viewContainer = inject(ViewContainerRef);
 
-  private sub: Subscription;
-  private observable: Observable<T | Loading>;
+  private sub: Subscription | null = null;
+  private observable?: Observable<T | Loading>;
 
   public state: NgxSuspenseState<T> = { state: 'loading' };
-  private loadingTemplate: TemplateRef<any>;
-  private errorTemplate: TemplateRef<any>;
-  private emptyTemplate: TemplateRef<any>;
-  private loadingEmbededView: EmbeddedViewRef<any>;
-  private errorEmbededView: EmbeddedViewRef<any>;
-  private emptyEmbededView: EmbeddedViewRef<any>;
-  private templateEmbededView: EmbeddedViewRef<NgxSuspenseDirectiveContext<T>>;
+  private loadingTemplate?: TemplateRef<any>;
+  private errorTemplate?: TemplateRef<any>;
+  private emptyTemplate?: TemplateRef<any>;
+  private loadingEmbededView?: EmbeddedViewRef<any>;
+  private errorEmbededView?: EmbeddedViewRef<any>;
+  private emptyEmbededView?: EmbeddedViewRef<any>;
+  private templateEmbededView?: EmbeddedViewRef<NgxSuspenseDirectiveContext<T>>;
 
   @Input() public set ngxSuspenseLoading(temp: TemplateRef<any>) {
     this.loadingTemplate = temp;
@@ -62,7 +62,7 @@ export class NgxSuspenseOfDirective<T> implements OnDestroy {
     }
   }
 
-  private onStateChange: NgxSuspenseStateChange;
+  private onStateChange?: NgxSuspenseStateChange;
   @Input() public set ngxSuspenseStateChangeFn(fn: NgxSuspenseStateChange) {
     this.onStateChange = fn;
   }
@@ -82,13 +82,17 @@ export class NgxSuspenseOfDirective<T> implements OnDestroy {
    */
   public static ngTemplateContextGuard<T>(
     dir: NgxSuspenseOfDirective<T>,
-    ctx: any
-  ): ctx is NgxSuspenseDirectiveContext<T> {
+    _ctx: any
+  ): _ctx is NgxSuspenseDirectiveContext<T> {
+    void _ctx;
     return true;
   }
 
   private processObservable(): void {
     this.setState({ state: 'loading' });
+    if (!this.observable) {
+      return;
+    }
 
     if (this.sub) {
       this.sub.unsubscribe();
