@@ -14,9 +14,7 @@ const file = resolve(__dirname, '..', 'projects', 'demo', 'src', 'environments',
 writeFileSync(
   file,
   `// IMPORTANT: THIS FILE IS AUTO GENERATED! DO NOT MANUALLY EDIT OR CHECKIN!
-/* eslint-disable */
 export const VERSION = ${JSON.stringify(VERSION, null, 4)};
-/* eslint-enable */
 `,
   { encoding: 'utf-8' }
 );
