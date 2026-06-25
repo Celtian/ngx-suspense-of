@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -25,13 +26,17 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:jest",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json"
+            "buildTarget": "ngx-suspense-of:build",
+            "tsConfig": "projects/ngx-suspense-of/tsconfig.spec.json",
+            "runner": "vitest",
+            "codeCoverage": true,
+            "codeCoverageReporters": [
+              "text",
+              "html",
+              "cobertura"
+            ]
           }
         },
         "lint": {
@@ -119,13 +124,21 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:jest",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
+            "buildTarget": "demo:build",
+            "tsConfig": "projects/demo/tsconfig.spec.json",
+            "runner": "vitest",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "projects/**/environments/**",
+              "projects/ngx-suspense-of/**"
             ],
-            "tsConfig": "tsconfig.spec.json"
+            "codeCoverageReporters": [
+              "text",
+              "html",
+              "cobertura"
+            ]
           }
         },
         "lint": {

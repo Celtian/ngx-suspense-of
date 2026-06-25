@@ -5,6 +5,11 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+  packages: write
+
 jobs:
   install-and-build:
     name: 🛠️ Install & Build
@@ -12,10 +17,10 @@ jobs:
 
     steps:
       - name: 🗜️ Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: 🗜️ Setup node version
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
@@ -33,7 +38,7 @@ jobs:
         run: yarn check-circular-dependencies
 
       - name: 🧪 Run tests
-        run: yarn test:jest
+        run: yarn test
 
       - name: ⬆️ Upload coverage reports
         uses: codecov/codecov-action@v4

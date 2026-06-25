@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -11,14 +10,9 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "paths": {
-      "ngx-repeat": [
-        "./projects/ngx-suspense-of/src/public-api"
-      ]
+      "ngx-repeat": ["./projects/ngx-suspense-of/src/public-api"]
     },
     "resolveJsonModule": true,
     "useDefineForClassFields": false
@@ -27,5 +21,6 @@
     "fullTemplateTypeCheck": true,
     "strictTemplates": true,
     "strictInjectionParameters": true
-  }
+  },
+  "exclude": ["**/*.spec.ts"]
 }
