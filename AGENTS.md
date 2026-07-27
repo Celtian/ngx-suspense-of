@@ -4,7 +4,7 @@ This file provides repository-specific guidance for coding agents working in thi
 
 ## Project overview
 
-- This is an Angular 22 workspace managed with Yarn.
+- This is an Angular 22 workspace managed with Bun.
 - `projects/ngx-suspense-of/` contains the published library.
 - `projects/demo/` contains the demo application and usage examples.
 - `projects/ngx-suspense-of/src/public-api.ts` defines the package's public API.
@@ -13,8 +13,8 @@ This file provides repository-specific guidance for coding agents working in thi
 ## Environment
 
 - Use Node.js 24, as specified by `.nvmrc`.
-- Use Yarn for dependency management. Do not create an npm lockfile.
-- Install dependencies with `yarn install --frozen-lockfile`.
+- Use Bun 1.3.14 for dependency management. Do not create an npm lockfile.
+- Install dependencies with `bun ci`.
 - The install hook generates `projects/demo/src/environments/version.ts`. This file is generated and
   gitignored; do not edit or commit it.
 
@@ -23,24 +23,24 @@ This file provides repository-specific guidance for coding agents working in thi
 Run commands from the repository root.
 
 ```sh
-yarn start                         # Serve the demo application
-yarn build                         # Build the library for production
-yarn build:demo                    # Build the demo for production
-yarn test                          # Test both the library and demo
-yarn ng test ngx-suspense-of       # Test only the library
-yarn ng test demo                  # Test only the demo
-yarn lint                          # Lint all projects
-yarn check-circular-dependencies   # Check public APIs for circular imports
+bun run start                              # Serve the demo application
+bun run build                              # Build the library for production
+bun run build:demo                         # Build the demo for production
+bun run test                               # Test both the library and demo
+bun run ng test ngx-suspense-of            # Test only the library
+bun run ng test demo                       # Test only the demo
+bun run lint                               # Lint all projects
+bun run check-circular-dependencies        # Check public APIs for circular imports
 ```
 
 For a complete validation matching pull-request CI, run:
 
 ```sh
-yarn lint
-yarn check-circular-dependencies
-yarn test
-yarn build:demo
-yarn build
+bun run lint
+bun run check-circular-dependencies
+bun run test
+bun run build:demo
+bun run build
 ```
 
 ## Code conventions
@@ -69,7 +69,7 @@ yarn build
 ## Documentation and public API changes
 
 - Update the root `README.md` when usage, compatibility, or the public API changes.
-- The root README is the source copied into the library package by `yarn script:sync-projects`; avoid
+- The root README is the source copied into the library package by `bun run script:sync-projects`; avoid
   editing `projects/ngx-suspense-of/README.md` independently.
 - Maintain backwards compatibility unless the task explicitly calls for a breaking change.
 - Do not manually edit versions or `CHANGELOG.md` as part of ordinary feature or fix work.
@@ -78,6 +78,6 @@ yarn build
 
 - Keep changes scoped to the requested task and preserve unrelated working-tree changes.
 - Do not commit generated output from `dist/`, `coverage/`, `.angular/`, or generated `version.ts` files.
-- Do not run `yarn version`, `yarn postversion`, `release:*`, `publish:*`, or registry setup scripts unless
+- Do not run `bun run version`, `bun run postversion`, `release:*`, `publish:*`, or registry setup scripts unless
   the user explicitly requests a release or publication.
 - Use Angular-style conventional commit messages when a commit is requested; commitlint enforces them.

@@ -16,20 +16,25 @@ jobs:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: 🗜️ Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
       - name: 🛠️ Install
         uses: ./.github/actions/cached-deps
 
       - name: 🛠️ Sync versions
-        run: yarn script:sync-projects
+        run: bun run script:sync-projects
 
       - name: 🧹 Lint
-        run: yarn lint
+        run: bun run lint
 
       - name: ♻️ Check circular dependencies
-        run: yarn check-circular-dependencies
+        run: bun run check-circular-dependencies
 
       - name: 🧪 Run tests
-        run: yarn test
+        run: bun run test
 
       - name: 🧪 Report code coverage
         uses: ./.github/actions/report-pr
@@ -45,7 +50,7 @@ jobs:
           dry_run: true
 
       - name: 📦 Build demo app
-        run: yarn build:demo --base-href https://celtian.github.io/ngx-suspense-of/
+        run: bun run build:demo --base-href https://celtian.github.io/ngx-suspense-of/
 
       - name: 📦 Build ngx-suspense-of
-        run: yarn build
+        run: bun run build

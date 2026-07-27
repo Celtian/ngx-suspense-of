@@ -24,10 +24,10 @@ Here's the [demo](http://celtian.github.io/ngx-suspense-of/) or [stackblitz live
 
 ## 🛠️ Install
 
-1. Use yarn (or npm) to install the package
+1. Use Bun to install the package
 
 ```terminal
-yarn add ngx-suspense-of
+bun add ngx-suspense-of
 ```
 
 2. Add `NgxSuspenseOfDirective` into your `imports`
@@ -89,13 +89,13 @@ import { NgxSuspenseOfDirective } from 'ngx-suspense-of';
 
 ## 🔧 Compatibility
 
-| Angular   | ngx-suspense-of | Install                      |
-| --------- | --------------- | ---------------------------- |
-| >= 22     | 4.x             | `yarn add ngx-suspense-of`   |
-| >= 20     | 3.x             | `yarn add ngx-suspense-of@3` |
-| >= 14     | 2.x             | `yarn add ngx-suspense-of@2` |
-| >= 12     | 1.x             | `yarn add ngx-suspense-of@1` |
-| >= 5 < 13 | 0.x             | `yarn add ngx-suspense-of@0` |
+| Angular   | ngx-suspense-of | Install                     |
+| --------- | --------------- | --------------------------- |
+| >= 22     | 4.x             | `bun add ngx-suspense-of`   |
+| >= 20     | 3.x             | `bun add ngx-suspense-of@3` |
+| >= 14     | 2.x             | `bun add ngx-suspense-of@2` |
+| >= 12     | 1.x             | `bun add ngx-suspense-of@1` |
+| >= 5 < 13 | 0.x             | `bun add ngx-suspense-of@0` |
 
 ## 📦 Dependencies
 
