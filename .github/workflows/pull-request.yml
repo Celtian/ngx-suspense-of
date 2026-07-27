@@ -13,7 +13,7 @@ jobs:
       - name: 🗜️ Setup node version
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
 
       - name: 🛠️ Install
@@ -37,7 +37,7 @@ jobs:
           coverage-file: coverage/**/cobertura-coverage.xml
 
       - name: ⬆️ Upload coverage reports
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
